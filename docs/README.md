@@ -84,7 +84,7 @@ def perimeter(a, b, c):
     return a + b + c
 ```
 Функция принимает в качестве аргумента 3 числа `int`/`float`, которые выражают длины стороны треугольника, и возвращает его периметр `int`/`float`.
-# Примеры вызовов
+## Примеры вызовов
 ### Square
 ![alt текст](examples/square.png)
 ### Rectangle
@@ -93,3 +93,5 @@ def perimeter(a, b, c):
 ![alt текст](examples/circle.png)
 ### Triangle
 ![alt текст](examples/triangle.png)
+## История разработки с хешами коммитов
+![alt текст](examples/history.png)
