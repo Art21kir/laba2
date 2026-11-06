@@ -1,4 +1,6 @@
 import unittest
+from NVException import negative_msg, NegativeValueException
+
 def area(a, b):
     '''принимает в качестве аргумента стороны прямоугольника a, b
     и возвращает площадь этого прямоугольника'''
@@ -51,6 +53,11 @@ class RectangleTests(unittest.TestCase):
         res = area(400000000000, 1600000000000)
         self.assertEqual(res, 640000000000000000000000)
 
+    def test_area_negative(self):
+        with self.assertRaises(NegativeValueException) as context:
+            area(-1, 1)
+        self.assertEqual(str(context.exception), negative_msg)
+
     def test_perimeter_1(self):
         res = perimeter(1, 2)
         self.assertEqual(res, 6)
@@ -74,3 +81,8 @@ class RectangleTests(unittest.TestCase):
     def test_perimeter_big(self):
         res = perimeter(10000000, 2000000)
         self.assertEqual(res, 24000000)
+
+    def test_perimeter_negative(self):
+        with self.assertRaises(NegativeValueException) as context:
+            perimeter(-1, 1)
+        self.assertEqual(str(context.exception), negative_msg)

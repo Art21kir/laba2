@@ -1,4 +1,6 @@
 import unittest
+from NVException import negative_msg, NegativeValueException
+
 def area(a):
     '''принимает в качестве аргумента сторону квадрата a и возвращает
     площадь этого квадрата'''
@@ -35,6 +37,11 @@ class SquareTests(unittest.TestCase):
         res = area(16000000)
         self.assertEqual(res, 256000000000000)
 
+    def test_area_negative(self):
+        with self.assertRaises(NegativeValueException) as context:
+            area(-1)
+        self.assertEqual(str(context.exception), negative_msg)
+
     def test_perimeter_1(self):
         res = perimeter(1)
         self.assertEqual(res, 4)
@@ -58,3 +65,8 @@ class SquareTests(unittest.TestCase):
     def test_perimeter_big_2(self):
         res = perimeter(21212121212121)
         self.assertEqual(res, 84848484848484)
+
+    def test_perimeter_negative(self):
+        with self.assertRaises(NegativeValueException) as context:
+            perimeter(-1)
+        self.assertEqual(str(context.exception), negative_msg)

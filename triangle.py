@@ -1,4 +1,5 @@
 import unittest
+from NVException import negative_msg, NegativeValueException
 def area(a, h):
     '''принимает в качестве аргумента сторону a, высоту h треугольника
     и возвращает площадь этого треугольника'''
@@ -42,6 +43,11 @@ class TriangleTests(unittest.TestCase):
         res = area(400000000000, 1600000000000)
         self.assertEqual(res, 320000000000000000000000)
 
+    def test_area_negative(self):
+        with self.assertRaises(NegativeValueException) as context:
+            area(-1, 1)
+        self.assertEqual(str(context.exception), negative_msg)
+
     def test_perimeter_1(self):
         res = perimeter(1, 1, 1)
         self.assertEqual(res, 3)
@@ -57,3 +63,8 @@ class TriangleTests(unittest.TestCase):
     def test_perimeter_big(self):
         res = perimeter(10000000, 2000000, 300000)
         self.assertEqual(res, 12300000)
+
+    def test_area_negative(self):
+        with self.assertRaises(NegativeValueException) as context:
+            perimeter(-1, 1, 1)
+        self.assertEqual(str(context.exception), negative_msg)
