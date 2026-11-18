@@ -1,0 +1,29 @@
+name: Тесты для питошки
+
+on: [push]
+
+jobs:
+  test:
+    name: Тестирование ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.12'] # Вы можете оставить только одну версию
+
+    steps:
+    - name: Checkout репозитория
+      uses: actions/checkout@v4
+
+    - name: Настройка Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: pip-апгрейд
+      run: python -m pip install --upgrade pip
+
+    - name: Запуск тестирования
+      run: |
+        python -m unittest discover -s . -p "*.py" -v
